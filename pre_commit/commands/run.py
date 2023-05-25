@@ -107,7 +107,8 @@ class Classifier:
             hook.types_or,
             hook.exclude_types,
         )
-        return tuple(names)
+        # Prepend paths with the current directory if they're not absolute
+        return tuple(["./" + name for name in names if not os.path.isabs(name)])
 
     @classmethod
     def from_config(
